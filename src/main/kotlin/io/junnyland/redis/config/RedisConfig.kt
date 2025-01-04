@@ -16,11 +16,6 @@ class RedisConfig(
     @Value("\${spring.data.redis.port}") private val port: Int
 ) {
     @Bean
-    fun redisConnectionFactory(): RedisConnectionFactory? {
-        return LettuceConnectionFactory(host, port)
-    }
-
-    @Bean(destroyMethod = "shutdown")
     fun redissonClient(): RedissonClient = Config()
         .apply {
             useSingleServer()
