@@ -15,15 +15,6 @@ class RedisConfig(
     @Value("\${spring.data.redis.host}") private val host: String,
     @Value("\${spring.data.redis.port}") private val port: Int
 ) {
-    @Bean
-    fun redissonClient(): RedissonClient = Config()
-        .apply {
-            useSingleServer()
-                .setAddress("redis://$host:$port")
-                .setDnsMonitoringInterval(-1)
-        }.let {
-            Redisson.create()
-        }
 
     @Bean
     fun redisConnectionFactory(redissonClient: RedissonClient): RedisConnectionFactory =
